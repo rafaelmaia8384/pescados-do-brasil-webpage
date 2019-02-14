@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Pescados do Brasil - Cadastrar Anúncio</title>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+        <script type = "text/javascript" language = "javascript">
+
+            $(document).ready(function() {
+
+                var id_usuario = localStorage.getItem("id_usuario");
+
+                $("#button_cadastrar").click(function(event) {
+
+                    var nome_anunciante = $("#nome_anunciante").val();
+                    var tipo_pescado = $("#tipo_pescado").val();
+                    var tipo_agua = $("#tipo_agua").val();
+                    var fresco_congelado = $("#fresco_congelado").val();
+                    var possui_selo_inspecao = $("#possui_selo_inspecao").val();
+                    var total_disponivel = $("#total_disponivel").val();
+                    var faz_entrega = $("#faz_entrega").val();
+                    var uf_produto = $("#uf_produto").val();
+                    var municipio_produto = $("#municipio_produto").val();
+                    var titulo = $("#titulo").val();
+                    var descricao = $("#descricao").val();
+                    var telefone = $("#telefone").val();
+
+                    if (nome_anunciante.length == 0) {
+
+                        alert("Insira o nome do anunciante.");
+
+                        return;
+                    }
+                    else if (tipo_pescado == 0) {
+
+                        alert("Selecione o tipo de pescado.");
+
+                        return;
+                    }
+                    else if (tipo_agua == 0) {
+
+                        alert("Selecione o tipo de água.");
+
+                        return;
+                    }
+                    else if (fresco_congelado == 0) {
+
+                        alert("Selecione como o pescado é vendido.");
+
+                        return;
+                    }
+                    else if (tipo_pescado == 0) {
+
+                        alert("Selecione se o produto possui selo de inspeção.");
+
+                        return;
+                    }
+                    else if (possui_selo_inspecao == 0) {
+
+                        alert("Selecione se o pescado possui selo de inspeção.");
+
+                        return;
+                    }
+                    else if (total_disponivel == 0) {
+
+                        alert("Selecione o quantos quilos o anunciante tem disponível.");
+
+                        return;
+                    }
+                    else if (faz_entrega == 0) {
+
+                        alert("Selecione se o anunciante faz entrega.");
+
+                        return;
+                    }
+                    else if (uf_produto == 0) {
+
+                        alert("Selecione a Unidade da Federação.");
+
+                        return;
+                    }
+                    else if (municipio_produto.length == 0) {
+
+                        alert("Insira o município do produto.");
+
+                        return;
+                    }
+                    else if (titulo.length == 0) {
+
+                        alert("Insira o título do anúncio.");
+
+                        return;
+                    }
+                    else if (descricao.length < 5) {
+
+                        alert("Insira a descrição do produto.");
+
+                        return;
+                    }
+                    else if (telefone.length < 10) {
+
+                        alert("Insira o telefone com DDD do anunciante.");
+
+                        return;
+                    }
+
+                    $.post("cadastrar-anuncio.php", {
+
+                        "id_usuario" : id_usuario,
+                        "nome_anunciante" : nome_anunciante,
+                        "tipo_pescado" :  tipo_pescado,
+                        "tipo_agua" : tipo_agua,
+                        "fresco_congelado" : fresco_congelado,
+                        "possui_selo_inspecao" : possui_selo_inspecao,
+                        "total_disponivel" : total_disponivel,
+                        "faz_entrega" : faz_entrega,
+                        "uf_produto" : uf_produto,
+                        "municipio_produto" : municipio_produto,
+                        "titulo" : titulo,
+                        "descricao" : descricao,
+                        "telefone" : telefone
+                    },
+
+                    function(data) {
+
+                        var json = jQuery.parseJSON(data);
+
+                        if (json.error == 0) {
+
+                            //fazer upload das imagens!
+
+                            var id_anuncio = json.extra.id_anuncio;
+                            var img = $("#upload1")[0].files[0];
+
+                            var fd = new FormData();
+                            fd.append('imagem', img);
+                            fd.append('id_anuncio', id_anuncio);
+
+                            $.ajax({
+
+                                url: 'cadastrar-imagem.php',
+                                data: fd,
+                                processData: false,
+                                contentType: false,
+                                type: 'POST',
+                                success: function(data){
+
+                                    alert(data);
+                                }
+                            });
+                        }
+                        else {
+
+                            alert(json.msg);
+                        }
+                    });
+                });
+            });
+
+        </script>
+
+    </head>
+<body>
+
+    <style>
+
+        body {
+
+            background: #2d343d;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            font-family: "Roboto", sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+
+            width: 700px;
+            background-color: #dddddd;
+            padding: 50px;
+        }
+
+        .btn-file {
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-file input[type=file] {
+
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 100px;
+            text-align: right;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            outline: none;
+            background: white;
+            cursor: inherit;
+            display: block;
+        }
+
+    </style>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                    <h2><b>Anunciar Pescado</b></h2>
+                    </br><h5>Insira abaixo todas as informações disponíveis sobre o anunciante e sobre o pescado.</h5></br>
+
+                    <div class="form-group"> <!-- Full Name -->
+                        <label for="nome_anunciante" class="control-label">Nome do anunciante (pessoa ou empresa)</label>
+                        <input type="text" class="form-control" id="nome_anunciante" name="full_name" placeholder="Nome">
+                    </div>
+
+                    <div class="form-group"> <!-- State Button -->
+                        <label for="tipo_pescado" class="control-label">Qual pescado o anunciante quer vender?</label>
+                        <select class="form-control" id="tipo_pescado">
+                            <option value="0"></option>
+                            <option value="1">Camarão</option>
+                            <option value="2">Caranguejo</option>
+                            <option value="3">Lagosta</option>
+                            <option value="4">Lula</option>
+                            <option value="5">Mexilhão</option>
+                            <option value="6">Ostra</option>
+                            <option value="7">Peixe</option>
+                            <option value="8">Polvo</option>
+                            <option value="9">Outros</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group"> <!-- State Button -->
+                        <label for="tipo_agua" class="control-label">Qual é o tipo de água do pescado?</label>
+                        <select class="form-control" id="tipo_agua">
+                            <option value="0"></option>
+                            <option value="1">Água doce</option>
+                            <option value="2">Água salgada ou salobra</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group"> <!-- State Button -->
+                        <label for="fresco_congelado" class="control-label">Como o pescado do anunciante é vendido?</label>
+                        <select class="form-control" id="fresco_congelado">
+                            <option value="0"></option>
+                            <option value="1">Fresco</option>
+                            <option value="2">Congelado</option>
+                            <option value="3">Fresco e congelado</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group"> <!-- State Button -->
+                        <label for="possui_selo_inspecao" class="control-label">O pescado possui selo de inspeção da Vigilância Sanitária?</label>
+                        <select class="form-control" id="possui_selo_inspecao">
+                            <option value="0"></option>
+                            <option value="1">Não</option>
+                            <option value="2">Sim, selo municipal</option>
+                            <option value="3">Sim, selo estadual</option>
+                            <option value="4">Sim, selo federal</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group"> <!-- State Button -->
+                        <label for="total_disponivel" class="control-label">Quantos quilogramas do pescado o anunciante tem disponível para venda?</label>
+                        <select class="form-control" id="total_disponivel">
+                            <option value="0"></option>
+                            <option value="1">1 a 5kg</option>
+                            <option value="2">6 a 10kg</option>
+                            <option value="3">11 a 25kg</option>
+                            <option value="4">26 a 50kg</option>
+                            <option value="5">51 a 100kg</option>
+                            <option value="6">101 a 200kg</option>
+                            <option value="7">201 a 500kg</option>
+                            <option value="8">Acima de 500kg</option>
+                            <option value="9">Acima de 1000kg</option>
+                            <option value="10">Acima de 2500kg</option>
+                            <option value="11">Acima de 5000kg</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group"> <!-- State Button -->
+                        <label for="faz_entrega" class="control-label">O anunciante faz a entrega do pescado?</label>
+                        <select class="form-control" id="faz_entrega">
+                            <option value="0"></option>
+                            <option value="1">Não</option>
+                            <option value="2">Sim, a partir de 1kg</option>
+                            <option value="3">Sim, a partir de 2kg</option>
+                            <option value="4">Sim, a partir de 5kg</option>
+                            <option value="5">Sim, a partir de 10kg</option>
+                            <option value="6">Sim, a partir de 50kg</option>
+                            <option value="7">Sim, a partir de 100kg</option>
+                            <option value="8">Sim, a partir de 250kg</option>
+                            <option value="9">Sim, a partir de 500kg</option>
+                            <option value="9">Sim, a partir de 1000kg</option>
+                            <option value="10">Sim, a partir de 2500kg</option>
+                            <option value="11">Sim, a partir de 5000kg</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group"> <!-- State Button -->
+                        <label for="uf_produto" class="control-label">Selecione a Unidade da Federação onde o pescado se encontra</label>
+                        <select class="form-control" id="uf_produto">
+                            <option value="0"></option>
+                            <option value="1">Acre</option>
+                            <option value="2">Alagoas</option>
+                            <option value="3">Amapá</option>
+                            <option value="4">Amazonas</option>
+                            <option value="5">Bahia</option>
+                            <option value="6">Ceará</option>
+                            <option value="7">Distrito Federal</option>
+                            <option value="8">Espírito Santo</option>
+                            <option value="9">Goiás</option>
+                            <option value="10">Maranhão</option>
+                            <option value="11">Mato Grosso</option>
+                            <option value="12">Mato Grosso do Sul</option>
+                            <option value="13">Minas Gerais</option>
+                            <option value="14">Pará</option>
+                            <option value="15">Paraíba</option>
+                            <option value="16">Paraná</option>
+                            <option value="17">Pernambuco</option>
+                            <option value="18">Piauí</option>
+                            <option value="19">Rio de Janeiro</option>
+                            <option value="20">Rio Grande do Norte</option>
+                            <option value="21">Rio Grande do Sul</option>
+                            <option value="22">Rondônia</option>
+                            <option value="23">Roraima</option>
+                            <option value="24">Santa Catarina</option>
+                            <option value="25">São Paulo</option>
+                            <option value="26">Sergipe</option>
+                            <option value="27">Tocantins</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="municipio_produto" class="control-label">Município onde o pescado se encontra</label>
+                        <input type="text" class="form-control" id="municipio_produto" name="municipio_produto" placeholder="Município">
+                    </div>
+
+                </br>
+
+                <h5>Selecione abaixo pelo menos uma imagem do pescado</h5></br>
+
+                <div class="form-group">
+                    <label for="upload1" class="control-label">Imagem 1</label>
+                    <input type="file" class="form-control-file" name="upload1" id="upload1" accept="image/*">
+                </div>
+
+                <div class="form-group">
+                    <label for="upload2" class="control-label">Imagem 2</label>
+                    <input type="file" class="form-control-file" name="upload2" id="upload2" accept="image/*">
+                </div>
+
+                <div class="form-group">
+                    <label for="upload3" class="control-label">Imagem 3</label>
+                    <input type="file" class="form-control-file" name="upload3" id="upload3" accept="image/*">
+                </div>
+
+                <div class="form-group">
+                    <label for="upload4" class="control-label">Imagem 4</label>
+                    <input type="file" class="form-control-file" name="upload4" id="upload4" accept="image/*">
+                </div>
+
+                <div class="form-group">
+                    <label for="upload5" class="control-label">Imagem 5</label>
+                    <input type="file" class="form-control-file" name="upload5" id="upload5" accept="image/*">
+                </div>
+
+            </br>
+
+            <div class="form-group">
+                <label for="titulo" class="control-label">Insira um título para o anúncio</label>
+                <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Exemplo: Camarão cinza de água salgada">
+            </div>
+
+            <div class="form-group">
+                <label for="descricao" class="control-label">Descreva o pescado de forma chamativa para o consumidor</label>
+                <textarea class="form-control" id="descricao" name="descricao" placeholder="Exemplo: Vendo camarão cinza cultivado em água salgada, com peso médio de 40 gramas. Temos pronta entrega em nossa região!" rows="7"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="telefone" class="control-label">Telefone do anunciante</label>
+                <input type="text" class="form-control" id="telefone" name="telefone" placeholder="DDD e Número">
+            </div>
+
+        </br></br>
+
+        <div class="form-group">
+            <button id="button_cadastrar" class="btn btn-primary btn-lg">Cadastrar anúncio</button>
+        </div>
+
+        </div>
+        </div>
+    </div>
+
+</body>
+<html>

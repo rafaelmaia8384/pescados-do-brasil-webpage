@@ -1,0 +1,792 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=9" />
+    <title>Pescados do Brasil</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <style>
+
+        @import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+        * {
+
+            font-family: "Roboto", sans-serif;
+        }
+
+        body {
+
+            margin: 0px;
+        }
+
+        .page {
+
+            width: 100%;
+            margin: auto;
+            padding-top: 20px;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .container {
+
+            width: 900px;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .navbar {
+
+            background-image: linear-gradient(45deg, #ced, #cef);
+            margin: 0 auto;
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+        }
+
+        .navbar img {
+
+            margin-top: -30px;
+            width: 900px;
+        }
+
+        .login-box {
+
+            margin: 10px;
+            padding: 10px;
+            font-size: 15px;
+            float: right;
+            align-items: flex-end;
+            position: absolute;
+            background-color: #eee;
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+        }
+
+        .login-box a {
+
+            color: #444;
+            text-decoration: none !important;
+        }
+
+        .login-box a:hover {
+
+            color: #17a;
+            text-decoration: none !important;
+        }
+
+        .search-bar {
+
+            width: 900px;
+            margin-top: -135px;
+        }
+
+        .search-bar input {
+
+            outline: 0;
+            background: rgba(255, 255, 255, 0.85);
+            border: 0;
+            padding: 10px;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            width: 825px;
+            box-sizing: border-box;
+            font-size: 13px;
+        }
+
+        .search-bar button {
+
+            background: #ef9527;
+            margin-left: 5px;
+            margin-bottom: -2px;
+            border: 0;
+            padding: 5px;
+            width: 45px;
+            height: 45px;
+            color: #fff;
+            font-size: 21px;
+            -webkit-transition: all 0.3 ease;
+            transition: all 0.3 ease;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .search-bar button:hover, .search-bar button:active {
+
+            background: #f4b623;
+        }
+
+        .search-options {
+
+            position: relative;
+            margin-left: 0px;
+            width: 900px;
+            height: 55px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 0;
+            z-index: 10;
+            box-sizing: border-box;
+            font-size: 13px;
+        }
+
+        .search-options select {
+
+            background: #f2f2f2;
+            margin: 0;
+            padding: 2px;
+            box-sizing: border-box;
+            font-size: 12px;
+        }
+
+        .options-cell {
+
+            float: left;
+            font-size: 12px;
+            color: #fff;
+            width: 146px;
+            height: 50px;
+            margin: 2px;
+        }
+
+        .styled-select {
+
+            margin: 4px;
+            background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
+            height: 29px;
+            overflow: hidden;
+            background-color: #107dac;
+        }
+
+        .styled-select select {
+
+            color: #fff;
+            background: transparent;
+            border: none;
+            font-size: 12px;
+            font-weight: bold;
+            height: 29px;
+            padding: 5px; /* If you add too much padding here, the options won't show in IE */
+            width: 268px;
+        }
+
+        .styled-select.slate {
+
+            background: url(http://i62.tinypic.com/2e3ybe1.jpg) no-repeat right center;
+            height: 34px;
+            width: 240px;
+        }
+
+        .styled-select.slate select {
+
+            border: 1px solid #ccc;
+            font-size: 16px;
+            height: 34px;
+            width: 268px;
+        }
+
+        .semi-square {
+
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+        }
+
+        .button-anuncio {
+
+            outline: 0;
+            margin-left: 15px;
+            background: #ef9527;
+            border: 0;
+            padding: 15px;
+            font-weight: bold;
+            color: #fff;
+            font-size: 14px;
+            -webkit-transition: all 0.3 ease;
+            transition: all 0.3 ease;
+            cursor: pointer;
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+        }
+
+        .button-pago {
+
+            outline: 0;
+            margin-left: 15px;
+            background: #1357aa;
+            border: 0;
+            padding: 15px;
+            font-weight: bold;
+            color: #fff;
+            font-size: 14px;
+            -webkit-transition: all 0.3 ease;
+            transition: all 0.3 ease;
+            cursor: pointer;
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+        }
+
+        .button-vantagens {
+
+            outline: 0;
+            margin-left: 15px;
+            background: #888;
+            border: 0;
+            padding: 15px;
+            font-weight: bold;
+            color: #fff;
+            font-size: 14px;
+            -webkit-transition: all 0.3 ease;
+            transition: all 0.3 ease;
+            cursor: pointer;
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+        }
+
+        .button-anuncio:hover, .button-anuncio:active {
+
+            background: #f4b623;
+        }
+
+        .button-pago:hover, .button-pago:active {
+
+            background: #006ebb;
+        }
+
+        .button-vantagens:hover, .button-vantagens:active {
+
+            background: #aaa;
+        }
+
+        .opcoes {
+
+            margin-top: 15px;
+            font-size: 15px;
+        }
+
+        .title-bar {
+
+            background-image: url('img/title-bar.png');
+        }
+
+        .produtor {
+
+            height: 250px;
+            margin-top: 15px;
+            background-color: #ddd;
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+        }
+
+        .categorias {
+
+            margin-top: 20px;
+            padding-bottom: 10px;
+            background-color: #ddd;
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+        }
+
+        .window-load-content {
+
+            margin: 10px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            height: 150px;
+            width: 810px;
+            float: left;
+            background-color: #eee;
+        }
+
+        .image-container {
+
+            display: none;
+        }
+
+        .navigation-layout {
+
+            flex-grow: 1;
+            height: 170px;
+            float: right;
+            margin-top: 10px;
+            margin-right: 10px;
+        }
+
+        .navigation-button {
+
+            color: #444;
+            height: 85px;
+            line-height: 85px;
+            font-size: 35px;
+            background-color: #bbb;
+            cursor: pointer;
+        }
+
+        .navigation-button:hover {
+
+            color: #111;
+            background-color: #aaa;
+        }
+
+        .loading-gif {
+
+            position: absolute;
+
+            width: 80px;
+            height: 80px;
+            left: 42%;
+            margin-top: 30px;
+        }
+
+        .window-description {
+
+            clear: both;
+            color: #444;
+            font-size: 12px;
+            text-align: left;
+            margin-left: 10px;
+        }
+
+        .window-division {
+
+            width: 880px;
+            height: 1px;
+            margin-left: 10px;
+            margin-bottom: 5px;
+            background-image: url('img/division-bar.png');
+        }
+
+        .window-description a {
+
+            color: #003d5e;
+            background-color: #ddd;
+            font-size: 12px;
+            text-align: left;
+            margin-left: 5px;
+        }
+
+        .img_container {
+
+            float: left;
+            position: relative;
+            width: 150px;
+            height: 150px;
+        }
+
+        .img_container_categorias {
+
+            float: left;
+            margin-top: 10px;
+            margin-left: 10px;
+            position: relative;
+            width: 212px;
+            height: 150px;
+        }
+
+        .img_container img {
+
+            float: left;
+            position: relative;
+            width: 150px;
+            height: 150px;
+            cursor: pointer;
+            border: 1px solid #222;
+        }
+
+        .img_container_categorias img {
+
+            width: 212px;
+            height: 150px;
+            cursor: pointer;
+        }
+
+        .img_text {
+
+            position: absolute;
+            //line-height: 150px;
+            font-size: 16px;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity .1s, visibility .1s;
+            cursor: pointer;
+        }
+
+        .img_text_categorias {
+
+            position: absolute;
+            line-height: 150px;
+            font-size: 22px;
+            font-weight: bold;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity .1s, visibility .1s;
+            cursor: pointer;
+        }
+
+        .img_container:hover .img_text {
+
+            visibility: visible;
+            transition: all 0.4s ease;
+            opacity: 1;
+        }
+
+        .img_container_categorias:hover .img_text_categorias {
+
+            visibility: visible;
+            transition: all 0.4s ease;
+            opacity: 1;
+        }
+
+        .footer {
+
+            height: 60px;
+            margin-top: 20px;
+            background-color: #333;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <div class="page">
+        <div class="container">
+            <div class="navbar">
+                <div style="float: right; font-size: 10px; color: #888; text-align: left; padding: 5px;">
+                    Aquatrade Aquicultura Ltda.
+                </div>
+                <div class="login-box">
+                    <a href="#"><i class="fas fa-user"></i> Entrar</a> |
+                    <a href="#"><i class="fas fa-id-card"></i> Cadastrar</a>
+                </div>
+                <img src="img/navbar1.png" />
+                <div class="search-bar">
+                    <div style="font-size: 14px; font-weight: bold; font-style:italic; color: #fff;">
+                        Compra e venda de pescados frescos e congelados
+                    </div>
+                    <input id="buscar" type="text" placeholder="Buscar produto"/>
+                    <button id="button_search"><i class="fas fa-search"></i></button>
+                    <div class="search-options">
+                        <div class="options-cell">
+                            Região:
+                            <div class="styled-select yellow semi-square">
+                                <select id="uf_produto">
+                                    <option value="0">Brasil</option>
+                                    <option value="1">Acre</option>
+                                    <option value="2">Alagoas</option>
+                                    <option value="3">Amapá</option>
+                                    <option value="4">Amazonas</option>
+                                    <option value="5">Bahia</option>
+                                    <option value="6">Ceará</option>
+                                    <option value="7">Distrito Federal</option>
+                                    <option value="8">Espírito Santo</option>
+                                    <option value="9">Goiás</option>
+                                    <option value="10">Maranhão</option>
+                                    <option value="11">Mato Grosso</option>
+                                    <option value="12">Mato Grosso do Sul</option>
+                                    <option value="13">Minas Gerais</option>
+                                    <option value="14">Pará</option>
+                                    <option value="15">Paraíba</option>
+                                    <option value="16">Paraná</option>
+                                    <option value="17">Pernambuco</option>
+                                    <option value="18">Piauí</option>
+                                    <option value="19">Rio de Janeiro</option>
+                                    <option value="20">Rio Grande do Norte</option>
+                                    <option value="21">Rio Grande do Sul</option>
+                                    <option value="22">Rondônia</option>
+                                    <option value="23">Roraima</option>
+                                    <option value="24">Santa Catarina</option>
+                                    <option value="25">São Paulo</option>
+                                    <option value="26">Sergipe</option>
+                                    <option value="27">Tocantins</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="options-cell">
+                            Tipo do pescado:
+                            <div class="styled-select semi-square">
+                                <select id="tipo_pescado">
+                                    <option value="0"></option>
+                                    <option value="1">Camarão</option>
+                                    <option value="3">Caranguejo</option>
+                                    <option value="4">Lagosta</option>
+                                    <option value="5">Lula</option>
+                                    <option value="6">Mexihão</option>
+                                    <option value="7">Ostra</option>
+                                    <option value="8">Peixe</option>
+                                    <option value="9">Outros</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="options-cell">
+                            Tipo de água:
+                            <div class="styled-select semi-square">
+                                <select id="tipo_agua">
+                                    <option value="0"></option>
+                                    <option value="1">Doce</option>
+                                    <option value="3">Salobra</option>
+                                    <option value="4">Salgada</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="options-cell">
+                            Armazenamento:
+                            <div class="styled-select semi-square">
+                                <select id="fresco_congelado">
+                                    <option value="0"></option>
+                                    <option value="1">Fresco</option>
+                                    <option value="3">Congelado</option>
+                                    <option value="4">Salgado</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="options-cell">
+                            Selo de inspeção:
+                            <div class="styled-select semi-square">
+                                <select id="possui_selo_inspecao">
+                                    <option value="0"></option>
+                                    <option value="1">Sem selo</option>
+                                    <option value="3">Selo municipal</option>
+                                    <option value="4">Selo estadual</option>
+                                    <option value="5">Selo federal</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="options-cell">
+                            Total disponível:
+                            <div class="styled-select semi-square">
+                                <select id="total_disponivel">
+                                    <option value="0"></option>
+                                    <option value="1">A partir de 1 kg</option>
+                                    <option value="3">mais de 5 kg</option>
+                                    <option value="4">mais de 10 kg</option>
+                                    <option value="5">mais de 25 kg</option>
+                                    <option value="6">mais de 50 kg</option>
+                                    <option value="7">mais de 100 kg</option>
+                                    <option value="8">mais de 200 kg</option>
+                                    <option value="9">mais de 500 kg</option>
+                                    <option value="10">mais de 1000 kg</option>
+                                    <option value="11">mais de 2500 kg</option>
+                                    <option value="12">acima de 5000 kg</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="opcoes">
+                <button class="button-anuncio">Fazer anúncio grátis <i class="fas fa-check"></i></button>
+                <button class="button-pago">Fazer anúncio pago <i class="fas fa-money-check-alt"></i></button>
+                <button class="button-vantagens">Vantagens do anúncio pago <i class="fas fa-question-circle"></i></button>
+            </div>
+
+            <div class="produtor">
+                <div class="title-bar" style="font-size: 14px; color: #ddd; font-weight: bold; text-align: left; padding: 8px;">
+                    <i class="fas fa-crown"></i> Anúncios do produtor:
+                </div>
+                <div style="display: flex;">
+                    <div class="window-load-content" id="content-produtor">
+                        <img class="loading-gif" id="loading-produtor"  src="img/loading.gif" />
+                        <div class="image-container" id="image-container-produtor">
+                        </div>
+                    </div>
+                    <div class="navigation-layout">
+                        <div class="navigation-button" id="navbutton-produtor-back"><i class="fas fa-chevron-left"></i></div>
+                        <div class="navigation-button" id="navbutton-produtor-next"><i class="fas fa-chevron-right"></i></div>
+                    </div>
+                </div>
+                <div class="window-division"></div>
+                <div class="window-description">
+                    * Os anúncios do tipo <b>produtor</b> geralmente destinam-se às vendas de grande porte.
+                    <a href="#">Saiba mais</a>
+                </div>
+            </div>
+
+            <div class="categorias">
+                <div class="title-bar" style="font-size: 14px; color: #ddd; font-weight: bold; text-align: left; padding: 8px; background-color: #003d5e;">
+                    <i class="fas fa-fish"></i> Categorias:
+                </div>
+                <div class="row">
+
+                    <div class="img_container_categorias">
+                        <img src="img/camarao.jpg" alt="Camarão">
+                        <div class="img_text_categorias">Camarão</div>
+                    </div>
+
+                    <div class="img_container_categorias">
+                        <img src="img/caranguejo.jpg" alt="Caranguejo">
+                        <div class="img_text_categorias">Caranguejo</div>
+                    </div>
+
+                    <div class="img_container_categorias">
+                        <img src="img/lagosta.jpg" alt="Lagosta">
+                        <div class="img_text_categorias">Lagosta</div>
+                    </div>
+
+                    <div class="img_container_categorias">
+                        <img src="img/lula.jpg" alt="Lula">
+                        <div class="img_text_categorias">Lula</div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="img_container_categorias">
+                        <img src="img/mexilhao.jpg" alt="Mexilhão" width="260">
+                        <div class="img_text_categorias">Mexilhão</div>
+                    </div>
+
+                    <div class="img_container_categorias">
+                        <img src="img/ostra.jpg" alt="Ostra" width="260">
+                        <div class="img_text_categorias">Ostra</div>
+                    </div>
+
+                    <div class="img_container_categorias">
+                        <img src="img/peixe.jpg" alt="Peixe" width="260">
+                        <div class="img_text_categorias">Peixe</div>
+                    </div>
+
+                    <div class="img_container_categorias">
+                        <img src="img/polvo.jpg" alt="Polvo" width="260">
+                        <div class="img_text_categorias">Polvo</div>
+                    </div>
+                </div>
+
+                <div style="clear: both; height: 10px;"></div>
+
+                <div class="window-division"></div>
+                <div class="window-description">
+                    * Não encontrou a categoria desejada? Os demais pescados são publicados na categoria <b>geral</b>.
+                </div>
+            </div>
+
+        </div>
+        <div class="footer">
+            Footer.
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="plugin/jquery.mask.min.js"></script>
+    <script src="plugin/sha512.js"></script>
+    <script src="plugin/valida.js"></script>
+    <script src="plugin/sweetalert2.all.min.js"></script>
+
+    <script>
+
+        var Base64={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9+/=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/rn/g,"n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}}
+
+        var index_produtor = 1;
+
+        $('document').ready(function() {
+
+            obterAnunciosprodutor(index_produtor);
+
+            $("#button_search").click(function() {
+
+                var produto = $("#buscar").val();
+
+                buscarProduto(produto, 1);
+            });
+
+            $('#buscar').on('keypress', function (e) {
+
+                if (e.which === 13) {
+
+                   $(this).attr("disabled", "disabled");
+
+                   var produto = $("#buscar").val();
+
+                   buscarProduto(produto, 1);
+
+                   $(this).removeAttr("disabled");
+                }
+          });
+
+            $("#navbutton-produtor-next").click(function() {
+
+                if ($("#loading-produtor").is(":hidden")) {
+
+                    obterAnunciosprodutor(++index_produtor);
+
+                    $("#loading-produtor").fadeIn(500);
+                    $("#image-container-produtor").fadeOut(500);
+                }
+            });
+
+            $("#navbutton-produtor-back").click(function() {
+
+                if (index_produtor == 1) return;
+
+                if ($("#loading-produtor").is(":hidden")) {
+
+                    obterAnunciosprodutor(--index_produtor);
+
+                    $("#loading-produtor").fadeIn(500);
+                    $("#image-container-produtor").fadeOut(500);
+                }
+            });
+        });
+
+        var buscarProduto = function(text, index) {
+
+            $.ajax({
+
+                url: 'app-v1.0/app.php',
+                dataType : 'json',
+                type: 'POST',
+                data: {
+
+                    plataforma: 'Web',
+                    versao: '1',
+                    codigo: '102',
+                    produto: text
+                },
+                success: function(data) {
+
+                    if (data.error == 0) {
+
+                        alert(Base64.decode(data.msg));
+                    }
+                }
+            });
+        }
+
+        var obterAnunciosprodutor = function(idx) {
+
+            $.ajax({
+
+                url: 'app-v1.0/app.php',
+                dataType : 'json',
+                type: 'POST',
+                data: {
+
+                    plataforma: 'Web',
+                    versao: '1',
+                    codigo: '101',
+                    index: idx
+                },
+                success: function(data) {
+
+                    if (data.error == 0) {
+
+                        var content = Base64.decode(data.msg);
+
+                        $("#image-container-produtor").html(content);
+                        $("#image-container-produtor").fadeIn(500);
+                        $("#loading-produtor").fadeOut(500);
+                    }
+                }
+            });
+        }
+
+    </script>
+
+</body>
+</html>
